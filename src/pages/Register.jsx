@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style.css";
 import PersonIcon from "@mui/icons-material/Person";
 import LockIcon from "@mui/icons-material/Lock";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 export default function Login() {
+  const [show, setShow] = useState(false);
+
   return (
     <div className="flex justify-center items-center mt-40">
       <div className="content">
@@ -36,12 +40,25 @@ export default function Login() {
           <div className="field">
             <input
               required=""
-              type="password"
+              type={show === false ? "password" : "text"}
               className="input mb-5"
               placeholder="Password"
             />
             <span className="span">
               <LockIcon sx={{ fontSize: 30 }} />
+            </span>
+            <span className="show-password cursor-pointer">
+              {show === false ? (
+                <VisibilityIcon
+                  sx={{ fontSize: 30 }}
+                  onClick={() => setShow(!show)}
+                />
+              ) : (
+                <VisibilityOffIcon
+                  sx={{ fontSize: 30 }}
+                  onClick={() => setShow(!show)}
+                />
+              )}
             </span>
           </div>
           <div>
@@ -53,8 +70,11 @@ export default function Login() {
               style={{ display: "none" }}
             />
             <div className="my-5 pl-2">
-              <label htmlFor="file" className="cursor-pointer items-center flex">
-                <AddAPhotoIcon/> &nbsp; Add an Avtar
+              <label
+                htmlFor="file"
+                className="cursor-pointer items-center flex"
+              >
+                <AddAPhotoIcon /> &nbsp; Add an Avtar
               </label>
             </div>
           </div>

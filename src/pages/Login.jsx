@@ -1,27 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style.css";
-import PersonIcon from '@mui/icons-material/Person';
-import LockIcon from '@mui/icons-material/Lock';
+import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
+import LockIcon from "@mui/icons-material/Lock";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 export default function Login() {
+  const [show, setShow] = useState(false);
+
   return (
     <div className="flex justify-center items-center mt-40">
       <div className="content">
         <div className="text">Login</div>
         <form action="#">
           <div className="field">
-            <input required="" type="text" className="input" placeholder="User Name" />
+            <input
+              required=""
+              type="email"
+              className="input"
+              placeholder="Email"
+            />
             <span className="span">
-              <PersonIcon sx={{fontSize: 30}}/>
+              <AlternateEmailIcon sx={{ fontSize: 30 }} />
             </span>
-            <label className="label">Email or Phone</label>
           </div>
           <div className="field">
-            <input required="" type="password" className="input" placeholder="Password" />
+            <input
+              required=""
+              type={show === false ? "password" : "text"}
+              className="input"
+              placeholder="Password"
+            />
             <span className="span">
-              <LockIcon sx={{fontSize: 30}}/>
+              <LockIcon sx={{ fontSize: 30 }} />
             </span>
-            <label className="label">Password</label>
+            <span className="show-password cursor-pointer">
+              {show === false ? (
+                <VisibilityIcon
+                  sx={{ fontSize: 30 }}
+                  onClick={() => setShow(!show)}
+                />
+              ) : (
+                <VisibilityOffIcon
+                  sx={{ fontSize: 30 }}
+                  onClick={() => setShow(!show)}
+                />
+              )}
+            </span>
           </div>
           <button className="button">Sign in</button>
           <div className="sign-up">
