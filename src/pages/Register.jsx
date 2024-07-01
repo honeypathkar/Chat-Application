@@ -11,7 +11,7 @@ export default function Login() {
   const [show, setShow] = useState(false);
 
   return (
-    <div className="flex justify-center items-center mt-40">
+    <div className="flex justify-center items-center mt-20">
       <div className="content">
         <div className="text">Register</div>
         <form action="#">
