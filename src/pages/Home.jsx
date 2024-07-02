@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <div>
       <Navbar />
-      <div className=" container flex w-[80%] h-[80vh] mt-5 rounded-xl">
+      <div className="container flex w-[80%] h-[80vh] mt-5 rounded-xl">
         <div className="flex-col w-[30%] bg-gray-200 sidebar">
           <Sidebar />
         </div>
