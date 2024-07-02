@@ -6,15 +6,58 @@ import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth, db, storage } from "../firebase";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { doc, setDoc } from "firebase/firestore";
 
 export default function Login() {
   const [show, setShow] = useState(false);
+  const [err, setErr] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // console.log(e.target[0].value);
+    const userName = e.target[0].value;
+    const email = e.target[1].value;
+    const password = e.target[2].value;
+    const file = e.target[3].files[0];
+    try {
+      const res = await createUserWithEmailAndPassword(auth, email, password);
+
+      const storageRef = ref(storage, userName);
+
+      const uploadTask = uploadBytesResumable(storageRef, file);
+      uploadTask.on(
+        (err) => {
+          setErr(true);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+            await updateProfile(res.user, {
+              displayName: userName,
+              photoURL: downloadURL,
+            });
+            await setDoc(doc(db, "users", res.user.uid), {
+              uid: res.user.uid,
+              displayName: userName,
+              email,
+              photoURL: downloadURL,
+            });
+            await setDoc(doc(db, "userChats", res.user.uid), {});
+          });
+        }
+      );
+    } catch (err) {
+      setErr(true);
+    }
+  };
 
   return (
     <div className="flex justify-center items-center mt-20">
       <div className="content">
         <div className="text">Register</div>
-        <form action="#">
+        <form onSubmit={handleSubmit}>
           <div className="field">
             <input
               required=""
@@ -26,7 +69,7 @@ export default function Login() {
               <PersonIcon sx={{ fontSize: 30 }} />
             </span>
           </div>
-          <div className="field mb-5">
+          <div className="field mb-[15px]">
             <input
               required=""
               type="email"
@@ -79,6 +122,7 @@ export default function Login() {
             </div>
           </div>
           <button className="button">Sign Up</button>
+          {err && <span>Something Went Wrong</span>}
           <div className="sign-up">
             Already Have an Account ?<a href="#"> Sign In</a>
           </div>
