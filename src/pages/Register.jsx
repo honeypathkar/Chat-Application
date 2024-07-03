@@ -10,7 +10,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db, storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [show, setShow] = useState(false);
@@ -127,7 +127,7 @@ export default function Login() {
           <button className="button">Sign Up</button>
           {err && <span>Something Went Wrong</span>}
           <div className="sign-up">
-            Already Have an Account ?<a href="#"> Sign In</a>
+            Already Have an Account ?<Link to="/login"> Sign In</Link>
           </div>
         </form>
       </div>

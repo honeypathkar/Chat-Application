@@ -4,15 +4,33 @@ import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import LockIcon from "@mui/icons-material/Lock";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Login() {
   const [show, setShow] = useState(false);
+  const [err, setErr] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // console.log(e.target[0].value);
+    const email = e.target[0].value;
+    const password = e.target[1].value;
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate("/");
+    } catch (err) {
+      setErr(true);
+    }
+  };
 
   return (
     <div className="flex justify-center items-center mt-20">
       <div className="content">
         <div className="text">Login</div>
-        <form action="#">
+        <form onSubmit={handleSubmit}>
           <div className="field">
             <input
               required=""
@@ -49,9 +67,10 @@ export default function Login() {
             </span>
           </div>
           <button className="button">Sign in</button>
+          {err && <span>Something Went Wrong</span>}
           <div className="sign-up">
             Not a member?
-            <a href="#"> Sign Up</a>
+            <Link to="/register"> Sign Up</Link>
           </div>
         </form>
       </div>
