@@ -7,9 +7,6 @@ export default function Sidebar() {
     <div>
       <SearchBox />
       <UserProfile />
-      <UserProfile />
-      <UserProfile />
-      <UserProfile />
     </div>
   );
 }
