@@ -29,27 +29,29 @@ export default function UserProfile() {
 
   return (
     <>
-      {Object.entries(chats)?.map((chat) => (
-        <div
-          className="flex pl-7 py-4 items-center  hover:bg-gray-800 hover:text-white"
-          key={chat[0]}
-          onClick={() => handleSelect(chat[1].userInfo)}
-        >
-          <img
-            src={chat[1].userInfo.photoURL}
-            alt="User Profile"
-            className="w-10 h-10 rounded-full mr-3"
-          />
-          <div>
-            <h6 className="userName font-bold ">
-              {chat[1].userInfo.displayName}
-            </h6>
-            <p className="userMsg text-gray-500">
-              {chat[1].userInfo.lastMessage?.text}
-            </p>
+      {Object.entries(chats)
+        ?.sort((a, b) => b[1].date - a[1].date)
+        .map((chat) => (
+          <div
+            className="flex pl-7 py-4 items-center  hover:bg-gray-800 hover:text-white"
+            key={chat[0]}
+            onClick={() => handleSelect(chat[1].userInfo)}
+          >
+            <img
+              src={chat[1].userInfo.photoURL}
+              alt="User Profile"
+              className="w-10 h-10 rounded-full mr-3"
+            />
+            <div>
+              <h6 className="userName font-bold ">
+                {chat[1].userInfo.displayName}
+              </h6>
+              <p className="userMsg text-gray-500">
+                {chat[1].lastMessage?.text}
+              </p>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
     </>
   );
 }

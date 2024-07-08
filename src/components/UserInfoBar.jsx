@@ -6,11 +6,6 @@ export default function UserInfoBar() {
 
   return (
     <div className="flex items-center py-3 px-2 bg-gray-700">
-      <img
-        src={data.user?.photoURL}
-        alt="User Profile"
-        className="w-10 h-10 rounded-full"
-      />
       <h3 className="px-2 font-bold text-xl text-white">
         {data.user?.displayName}
       </h3>
