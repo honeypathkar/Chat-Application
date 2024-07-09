@@ -16,54 +16,35 @@ import SendIcon from "@mui/icons-material/Send";
 
 export default function InputBox() {
   const [text, setText] = useState("");
-  const [img, setImg] = useState(null);
 
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
 
   const handleSend = async () => {
-    if (img) {
-      const storageRef = ref(storage, uuid());
+    await updateDoc(doc(db, "chats", data.chatId), {
+      message: arrayUnion({
+        id: uuid(),
+        text,
+        senderId: currentUser.uid,
+        date: Timestamp.now(),
+      }),
+    });
 
-      const uploadTask = uploadBytesResumable(storageRef, img);
-
-      uploadTask.on(() => {
-        getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-          await updateDoc(doc(db, "chats", data.chatId), {
-            message: arrayUnion({
-              id: uuid(),
-              text,
-              senderId: currentUser.uid,
-              date: Timestamp.now(),
-              img: downloadURL,
-            }),
-          });
-        });
-      });
-    } else {
-      await updateDoc(doc(db, "chats", data.chatId), {
-        message: arrayUnion({
-          id: uuid(),
-          text,
-          senderId: currentUser.uid,
-          date: Timestamp.now(),
-        }),
-      });
-    }
     await updateDoc(doc(db, "userChats", currentUser.uid), {
       [data.chatId + ".lastMessage"]: {
         text,
       },
       [data.chatId + ".date"]: serverTimestamp(),
     });
+
     await updateDoc(doc(db, "userChats", data.user.uid), {
       [data.chatId + ".lastMessage"]: {
         text,
       },
       [data.chatId + ".date"]: serverTimestamp(),
     });
+
     setText("");
-    setImg(null);
   };
   return (
     <div>
@@ -71,20 +52,6 @@ export default function InputBox() {
         Your message
       </label>
       <div className="flex items-center py-2 px-3 bg-gray-50 rounded-lg dark:bg-gray-700">
-        <div>
-          <input
-            type="file"
-            id="file"
-            style={{ display: "none" }}
-            onChange={(e) => setImg(e.target.files[0])}
-          />
-          <label
-            htmlFor="file"
-            className="inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
-          >
-            <ImageIcon />
-          </label>
-        </div>
         <input
           id="chat"
           rows="1"
