@@ -14,7 +14,7 @@ export default function Navbar() {
 
   return (
     <div>
-      <nav className="flex justify-between bg-gray-600 py-3 rounded-t-lg">
+      <nav className="flex justify-between bg-gray-600 py-3 fixed top-0 w-full">
         <h1 className="flex items-center pl-2 text-white text-xl">Chat App</h1>
         <div>
           <div className="relative mr-5">
@@ -36,7 +36,7 @@ export default function Navbar() {
             {isOpen && (
               <div
                 id="dropdownAvatar"
-                className="fixed z-10 bg-white text-black divide-y divide-gray-100 rounded-lg shadow w-52 -ml-32 mt-6 dark:bg-gray-700 dark:divide-gray-600"
+                className="fixed z-50 mt-20 bg-white text-black divide-y divide-gray-100 rounded-lg shadow w-52 -ml-40 dark:bg-gray-700 dark:divide-gray-600"
               >
                 <div className="px-4 py-3 text-sm">
                   <div>{currentUser.displayName}</div>

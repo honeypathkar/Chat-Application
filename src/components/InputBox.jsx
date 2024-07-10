@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import ImageIcon from "@mui/icons-material/Image";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
 import {
@@ -10,8 +9,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { v4 as uuid } from "uuid";
-import { storage, db } from "../firebase";
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { db } from "../firebase";
 import SendIcon from "@mui/icons-material/Send";
 
 export default function InputBox() {
@@ -63,6 +61,7 @@ export default function InputBox() {
         <button
           onClick={handleSend}
           className="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600"
+          disabled={text.length === 0 ? true : false}
         >
           <SendIcon />
         </button>

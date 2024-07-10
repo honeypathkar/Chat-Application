@@ -115,11 +115,10 @@
   padding-top: 5px;
 }
 
-.sidebar {
-  border-radius: 0 0 0 15px;
-}
-
-.chatbox {
-  border-radius: 0 15px 15px 0;
-
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }

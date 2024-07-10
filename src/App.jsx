@@ -11,6 +11,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
+import "./App.css"
 
 export default function App() {
   const { currentUser } = useContext(AuthContext);

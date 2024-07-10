@@ -7,14 +7,14 @@ import "./style.css";
 export default function Home() {
   return (
     <div>
-      <div className="container mt-5">
+      <div>
         <Navbar />
       </div>
-      <div className="flex container w-[100%] h-[80vh] rounded-xl justify-center">
-        <div className="flex-col w-[40%] bg-gray-200 sidebar">
+      <div className="flex w-[100%] h-[100vh] rounded-xl mt-[68px] justify-center">
+        <div className="flex-col w-[40%] bg-gray-200 overflow-hidden">
           <Sidebar />
         </div>
-        <div className="w-[60%] bg-gray-600 chatbox">
+        <div className="w-[60%] bg-gray-600 mb-5">
           <ChatBox />
         </div>
       </div>
