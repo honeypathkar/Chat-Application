@@ -74,13 +74,13 @@ export default function SearchBox() {
   };
 
   return (
-    <div className="fixed top-[70px]  w-[40%]">
+    <div>
       <div className="flex justify-center">
         <input
           className="input mt-3"
           name="text"
           placeholder="Search..."
-          type="search"
+          type="text"
           onChange={(e) => setUserName(e.target.value)}
           onKeyDown={handleKey}
           value={userName}

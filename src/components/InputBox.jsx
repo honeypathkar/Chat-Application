@@ -49,7 +49,7 @@ export default function InputBox() {
       <label htmlFor="chat" className="sr-only">
         Your message
       </label>
-      <div className="flex items-center py-2 px-3 bg-gray-50 rounded-lg dark:bg-gray-700">
+      <div className="flex items-center py-2 px-3 bg-gray-50 dark:bg-gray-700">
         <input
           id="chat"
           rows="1"

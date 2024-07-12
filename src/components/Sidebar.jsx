@@ -4,7 +4,7 @@ import UserProfile from "./UserProfile";
 
 export default function Sidebar() {
   return (
-    <div>
+    <div className="overflow-hidden">
       <SearchBox />
       <UserProfile />
     </div>

@@ -10,8 +10,8 @@ export default function Home() {
       <div>
         <Navbar />
       </div>
-      <div className="flex w-[100%] h-[100vh] rounded-xl mt-[68px] justify-center">
-        <div className="flex-col w-[40%] bg-gray-200 overflow-hidden">
+      <div className="flex w-[100%] h-[100vh] rounded-xl mt-[68px] justify-between">
+        <div className="w-[40%] h-[100vh] bg-gray-200 overflow-hidden left-0 sidebar">
           <Sidebar />
         </div>
         <div className="w-[60%] bg-gray-600 mb-5">

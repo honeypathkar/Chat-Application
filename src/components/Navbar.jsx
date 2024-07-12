@@ -3,6 +3,7 @@ import { auth } from "../firebase";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import React, { useState } from "react";
+import NotUserImage from "./images/notUser.webp";
 
 export default function Navbar() {
   const { currentUser } = useContext(AuthContext);
@@ -27,7 +28,9 @@ export default function Navbar() {
             >
               <span className="sr-only">Open user menu</span>
               <img
-                src={currentUser.photoURL}
+                src={
+                  !currentUser.photoURL ? NotUserImage : currentUser.photoURL
+                }
                 alt=""
                 className="w-10 h-10 rounded-full"
               />
