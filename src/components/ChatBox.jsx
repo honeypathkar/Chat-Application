@@ -2,6 +2,7 @@ import React from "react";
 import UserInfoBar from "./UserInfoBar";
 import InputBox from "./InputBox";
 import Messages from "./Messages";
+import "./style.css";
 
 export default function ChatBox() {
   return (
@@ -9,10 +10,10 @@ export default function ChatBox() {
       <div className="flex-none fixed top-[70px] w-full">
         <UserInfoBar />
       </div>
-      <div className="flex-grow overflow-y-auto mt-20">
+      <div className="flex-grow overflow-y-auto mt-[60px] mb-[60px]">
         <Messages />
       </div>
-      <div className="flex-none fixed bottom-0 w-[60%]">
+      <div className="flex-none fixed bottom-0 message-sender">
         <InputBox />
       </div>
     </div>

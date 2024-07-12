@@ -20,3 +20,12 @@ input:hover {
     outline: 1px solid lightgrey;
 }
 
+.message-sender {
+    width: 60%;
+}
+
+@media (max-width: 768px) {
+    .message-sender {
+        width: 100%;
+    }
+}

@@ -123,8 +123,55 @@ body,
   padding: 0;
 }
 
-.sidebar::-webkit-scrollbar {
-  display: none;
-  overflow-x: hidden;
-  overflow-y: hidden;
+/* Base styles */
+.sidebar {
+  width: 40%;
+  height: 100vh;
+  background-color: #e2e8f0;
+  /* bg-gray-200 */
+  overflow: hidden;
+  position: fixed;
+  left: 0;
+  transition: transform 0.3s ease;
+}
+
+.chat-box {
+  width: 60%;
+  height: 100vh;
+  margin-left: 40%;
+}
+
+.toggle-sidebar-btn {
+  position: fixed;
+  top: 20px;
+  padding: 10px 20px;
+  background-color: #4a5568;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 128px;
+  visibility: hidden;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+    width: 60%;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+    z-index: 1;
+  }
+
+  .chat-box {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .toggle-sidebar-btn {
+    visibility: visible;
+  }
 }
