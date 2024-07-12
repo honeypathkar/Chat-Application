@@ -7,11 +7,13 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { useNavigate, Link } from "react-router-dom";
+import Loader from "../components/Loader";
 
 export default function Login() {
   const [show, setShow] = useState(false);
   const [err, setErr] = useState(false);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,8 +21,10 @@ export default function Login() {
     const email = e.target[0].value;
     const password = e.target[1].value;
     try {
+      setLoading(true);
       await signInWithEmailAndPassword(auth, email, password);
       navigate("/");
+      setLoading(false);
     } catch (err) {
       setErr(true);
     }
@@ -67,6 +71,7 @@ export default function Login() {
             </span>
           </div>
           <button className="button">Sign in</button>
+          <div className="flex justify-center">{loading && <Loader />}</div>
           {err && <span>Something Went Wrong</span>}
           <div className="sign-up">
             Not a member?

@@ -11,11 +11,13 @@ import { auth, db, storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 import { Link, useNavigate } from "react-router-dom";
+import Loader from "../components/Loader";
 
 export default function Login() {
   const [show, setShow] = useState(false);
   const [err, setErr] = useState(false);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,11 +32,13 @@ export default function Login() {
       const storageRef = ref(storage, userName);
 
       const uploadTask = uploadBytesResumable(storageRef, file);
+
       uploadTask.on(
         (err) => {
           setErr(true);
         },
         () => {
+          setLoading(true);
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
             await updateProfile(res.user, {
               displayName: userName,
@@ -48,6 +52,7 @@ export default function Login() {
             });
             await setDoc(doc(db, "userChats", res.user.uid), {});
             navigate("/");
+            setLoading(false);
           });
         }
       );
@@ -125,6 +130,7 @@ export default function Login() {
             </div>
           </div>
           <button className="button">Sign Up</button>
+          <div className="flex justify-center">{loading && <Loader />}</div>
           {err && <span>Something Went Wrong</span>}
           <div className="sign-up">
             Already Have an Account ?<Link to="/login"> Sign In</Link>
