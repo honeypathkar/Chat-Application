@@ -123,16 +123,18 @@ body,
   padding: 0;
 }
 
-/* Base styles */
 .sidebar {
   width: 40%;
   height: 100vh;
   background-color: #e2e8f0;
-  /* bg-gray-200 */
   overflow: hidden;
   position: fixed;
   left: 0;
   transition: transform 0.3s ease;
+}
+
+.sidebar.open {
+  transform: translateX(0);
 }
 
 .chat-box {
@@ -143,18 +145,22 @@ body,
 
 .toggle-sidebar-btn {
   position: fixed;
-  top: 20px;
-  padding: 10px 20px;
-  background-color: #4a5568;
+  top: 130px;
+  left: 0px;
+  padding: 10px 10px;
+  background-color: #b9b9b9;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 128px;
+  transition: left 0.3s ease;
   visibility: hidden;
 }
 
-/* Responsive styles */
+.toggle-sidebar-btn.open {
+  left: calc(40% + 40px);
+}
+
 @media (max-width: 768px) {
   .sidebar {
     transform: translateX(-100%);
@@ -173,5 +179,10 @@ body,
 
   .toggle-sidebar-btn {
     visibility: visible;
+    left: 0px;
+  }
+
+  .toggle-sidebar-btn.open {
+    left: calc(60% + 0px);
   }
 }
