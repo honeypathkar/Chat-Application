@@ -14,7 +14,7 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <div className="font-mono">
       <div>
         <Navbar />
       </div>
@@ -22,7 +22,7 @@ export default function Home() {
         <div className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
           <Sidebar />
         </div>
-        <div className="w-full bg-gray-600 mb-5 chat-box">
+        <div className="w-full bg-gray-400 mb-5 chat-box">
           <ChatBox isSidebarOpen={isSidebarOpen} />
         </div>
       </div>

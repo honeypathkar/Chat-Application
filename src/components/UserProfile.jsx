@@ -51,9 +51,11 @@ export default function UserProfile() {
               <h6 className="userName font-bold ">
                 {chat[1].userInfo.displayName}
               </h6>
-              <p className="userMsg text-gray-500">
-                {chat[1].lastMessage?.text}
-              </p>
+              <div className="flex">
+                <p className="userMsg text-gray-500">
+                  {chat[1].lastMessage?.text}
+                </p>
+              </div>
             </div>
           </div>
         ))}

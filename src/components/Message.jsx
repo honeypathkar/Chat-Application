@@ -36,7 +36,7 @@ export default function Message({ message }) {
       </div>
       <div className="my-3 max-w-[70%] flex flex-col items-end">
         <h1
-          className={`bg-gray-100 px-2 py-2 text-black ${
+          className={`bg-gray-50 px-2 py-2 text-black ${
             message.senderId === currentUser.uid
               ? "rounded-t-lg rounded-bl-lg"
               : "rounded-t-lg rounded-br-lg"
