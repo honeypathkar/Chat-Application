@@ -10,7 +10,7 @@ export default function ChatBox() {
       <div className="flex-none fixed top-[70px] w-full">
         <UserInfoBar />
       </div>
-      <div className="flex-grow overflow-y-auto mt-[60px] mb-[60px]">
+      <div className="flex-grow overflow-scroll mt-[60px] mb-[60px]">
         <Messages />
       </div>
       <div className="flex-none fixed bottom-0 message-sender">

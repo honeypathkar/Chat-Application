@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./style.css";
 import {
   where,
@@ -36,9 +36,13 @@ export default function SearchBox() {
       setErr(true);
     }
   };
-  const handleKey = (e) => {
-    e.code === "Enter" && handleSearch();
-  };
+
+  useEffect(() => {
+    let timer = setTimeout(() => {
+      handleSearch();
+    }, 800);
+    return () => clearTimeout(timer);
+  }, [userName]);
 
   const handleSelect = async () => {
     const combineId =
@@ -70,8 +74,8 @@ export default function SearchBox() {
         });
       }
     } catch (error) {}
-    setUser(null);
     setUserName("");
+    setUser(null);
   };
 
   return (
@@ -84,7 +88,6 @@ export default function SearchBox() {
             className="ui-input"
             type="text"
             onChange={(e) => setUserName(e.target.value)}
-            onKeyDown={handleKey}
             value={userName}
           />
           <button className="ui-input-icon" onClick={handleSearch}>

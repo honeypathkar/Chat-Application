@@ -14,7 +14,7 @@ export default function Message({ message }) {
 
   return (
     <div
-      className={`flex gap-3 text-white overflow-scroll ${
+      className={`flex gap-3 text-white overflow-y-auto ${
         message.senderId === currentUser.uid ? "flex-row-reverse" : ""
       }`}
       ref={ref}
